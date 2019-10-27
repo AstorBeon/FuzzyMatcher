@@ -1,9 +1,20 @@
 
+############## tech functs
+def generate_possible_combinations(string):
+    #returns list of possible strings
+    tab=string.split(" ")
+    result=[]
+    for i in range(0, len(tab) + 1):
+        for combo in itertools.combinations(tab, i):
+            result.append(combo)
+
+
+####################
 def count_similarity_percent(one, two):
     one=one.upper().replace(" ",'')
     two=two.upper().replace(" ",'')
 
-    #todo combine all different combinations of multiple words
+
 
     if two.__contains__(one):
         return len(one) * 100 / len(two)
@@ -25,10 +36,6 @@ def count_similarity_percent(one, two):
            if len(two)-i> longestsimilar:
                longestsimilar=len(two)-i
 
-
-
-
-    print("Longest similar: " + str(longestsimilar))
     if len(two)>len(one):
 
         return longestsimilar*100/len(two)
@@ -36,13 +43,13 @@ def count_similarity_percent(one, two):
         return longestsimilar * 100 / len(one)
     #todo cover scenario with sentences, not only words
 
-def match_by_length(one,two,handicap):
-    if len(one) in range(len(two)-handicap,len(two)+handicap):
+def match_by_length(one,two,diff):
+    if len(one) in range(len(two)-diff,len(two)+diff):
         return True
     else:
         return False
 
-def simple_fuzzy_match(one,two, percent):
+def simple_match(one,two, percent):
 
     if count_similarity_percent(one,two)>=percent:
         return True
@@ -51,4 +58,11 @@ def simple_fuzzy_match(one,two, percent):
 
 
 
-print(simple_fuzzy_match("Brad ford","cityradf ord",40))
+print(simple_match("Brad ford","cityradf ord",40))
+
+for i in generate_possible_combnations("uno dos tres"):
+    print(i)
+
+
+
+#todo function to merge dataframes
